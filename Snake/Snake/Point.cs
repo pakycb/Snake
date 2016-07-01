@@ -35,10 +35,10 @@ namespace Snake
                     this.x -= offset;
                     break;
                 case Direction.UP:
-                    this.y += offset;
+                    this.y -= offset;
                     break;
                 case Direction.DOWN:
-                    this.y -= offset;
+                    this.y += offset;
                     break;
             }
         }
