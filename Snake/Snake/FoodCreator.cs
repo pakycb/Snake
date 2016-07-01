@@ -19,10 +19,16 @@ namespace Snake
             this.sym = _sym;
         }
 
-        public Point CreatFood() {
+        public Point CreatFood(List<Figure> figure) {
             int x = rand.Next(2, mapWidth - 2);
             int y = rand.Next(2, mapHeight - 2);
-            return new Point(x, y, sym);
+            Point p = new Point(x, y, sym);
+            
+            foreach(var f in figure) {
+                if (f.isHit(p)) CreatFood(figure);
+            }
+            
+            return p;
         }
     }
 }

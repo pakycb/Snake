@@ -12,7 +12,7 @@ namespace Snake
         {
             pList = new List<Point>();
 
-            for (int x = yPos; x <= yPos + length; x++)
+            for (int x = yPos; x < yPos + length; x++)
             {
                 Point p = new Point(xPos, x, sym);
                 pList.Add(p);

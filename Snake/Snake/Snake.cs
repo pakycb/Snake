@@ -44,7 +44,7 @@ namespace Snake
 
         internal bool Eat(Point food)
         {
-            Point head = GetNextPoint();
+            Point head = pList.Last();
             if (head.isHit(food))
             {
                 food.sym = head.sym;
@@ -55,22 +55,43 @@ namespace Snake
             else return false;
         }
 
+        public bool isHitTail() {
+            var head = pList.Last();
+            for (int i = 0; i < pList.Count - 3; i++) {
+                if (head.isHit(pList[i])) return true;
+            }
+            return false;
+        }
+        /*
+        public bool isWallHit(List<Figure> walls)
+        {
+            Point head = pList.Last();
+            foreach (var wall in walls) {
+                foreach (Point poi in wall.pList)
+                {
+                    if (head.isHit(poi)) return true;
+                }
+            }
+            return false;
+        }
+        */
         public void HandleKey(ConsoleKey key)
         {
-            switch (key)
+            if (key == ConsoleKey.LeftArrow || key == ConsoleKey.A)
             {
-                case ConsoleKey.LeftArrow:
-                    if(direction != Direction.RIGHT) direction = Direction.LEFT;
-                    break;
-                case ConsoleKey.RightArrow:
-                    if (direction != Direction.LEFT) direction = Direction.RIGHT;
-                    break;
-                case ConsoleKey.UpArrow:
-                    if (direction != Direction.DOWN) direction = Direction.UP;
-                    break;
-                case ConsoleKey.DownArrow:
-                    if (direction != Direction.UP) direction = Direction.DOWN;
-                    break;
+                if (direction != Direction.RIGHT) direction = Direction.LEFT;
+            }
+            if (key == ConsoleKey.RightArrow || key == ConsoleKey.D)
+            {
+                if (direction != Direction.LEFT) direction = Direction.RIGHT;
+            }
+            if (key == ConsoleKey.UpArrow || key == ConsoleKey.W)
+            {
+                if (direction != Direction.DOWN) direction = Direction.UP;
+            }
+            if (key == ConsoleKey.S || key == ConsoleKey.DownArrow)
+            {
+                if(direction != Direction.UP) direction = Direction.DOWN;
             }
         }
     }
